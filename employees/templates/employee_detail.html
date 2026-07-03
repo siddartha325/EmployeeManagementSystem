@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-4">
+
+        <div class="card shadow text-center">
+
+            <div class="card-body">
+
+                {% if employee.photo %}
+
+                    <img src="{{ employee.photo.url }}"
+                         class="rounded-circle mb-3"
+                         width="180"
+                         height="180">
+
+                {% else %}
+
+                    <img src="{% static 'images/default-user.png' %}"
+                         class="rounded-circle mb-3"
+                         width="180"
+                         height="180">
+
+                {% endif %}
+
+                <h3>{{ employee.name }}</h3>
+
+                <span class="badge bg-primary">
+
+                    {{ employee.department }}
+
+                </span>
+
+                <br><br>
+
+                <span class="badge bg-success">
+
+                    {{ employee.designation }}
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-8">
+
+        <div class="card shadow">
+
+            <div class="card-header bg-primary text-white">
+
+                <h4>Employee Information</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <p><strong>Employee ID</strong></p>
+                        <h5>#{{ employee.id }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <p><strong>Email</strong></p>
+                        <h5>{{ employee.email }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+
+                        <p><strong>Phone</strong></p>
+                        <h5>{{ employee.phone }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+
+                        <p><strong>Gender</strong></p>
+                        <h5>{{ employee.gender }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+
+                        <p><strong>Department</strong></p>
+                        <h5>{{ employee.department }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+
+                        <p><strong>Designation</strong></p>
+                        <h5>{{ employee.designation }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+
+                        <p><strong>Salary</strong></p>
+                        <h5>₹ {{ employee.salary }}</h5>
+
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+
+                        <p><strong>Joining Date</strong></p>
+                        <h5>{{ employee.joining_date }}</h5>
+
+                    </div>
+
+                    <div class="col-12 mt-4">
+
+                        <p><strong>Address</strong></p>
+
+                        <div class="alert alert-light">
+
+                            {{ employee.address }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <a href="{% url 'employee_list' %}"
+           class="btn btn-secondary">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back
+
+        </a>
+
+        {% if request.user.is_superuser %}
+
+        <a href="{% url 'edit_employee' employee.id %}"
+           class="btn btn-warning">
+
+            <i class="bi bi-pencil-square"></i>
+
+            Edit
+
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

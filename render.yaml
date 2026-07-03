@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: employee-management-system
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn employee_management.wsgi:application"
